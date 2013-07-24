@@ -10,6 +10,12 @@
   <%= @user.name%>
 </p>
 
+<p>
+  <b>Created_at:</b>
+  <%= @user.created_at%>
+</p>
+
 
 <%= link_to 'Edit', edit_user_micropost_path(@user,@micropost) %> |
 <%= link_to 'Back' %>
+<%= link_to 'Destroy', edit_user_micropost_path(@user,@micropost) %> |
