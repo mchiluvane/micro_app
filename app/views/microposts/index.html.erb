@@ -14,7 +14,9 @@
     <td><%= micropost.content %> </td>
      <td><%= micropost.user_id %></td>
     <td><%= link_to 'Show', user_micropost_path(@user,micropost) %></td>
+     <% if can? :update, @article %>  
     <td><%= link_to 'Edit', edit_user_micropost_path(@user,micropost) %></td>
+    <% if can? :destroy, @article %> 
     <td><%= link_to 'Destroy', user_micropost_path(@user,micropost), method: :delete, data: { confirm: 'Are you sure?' } %></td>  
   </tr>
 <% end %>

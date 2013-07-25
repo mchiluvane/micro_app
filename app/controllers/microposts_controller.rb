@@ -1,9 +1,11 @@
 class MicropostsController < ApplicationController
+  before_filter :get_user
+  before_filter :get_micropost, except: [:show, :edit, :update, :destroy]
   # GET /microposts
   # GET /microposts.json
   def index
     # @microposts = Micropost.all
-    @user = User.find(params[:user_id])
+    #@user = User.find(params[:user_id])
     @microposts = @user.microposts
 
     respond_to do |format|
@@ -16,7 +18,7 @@ class MicropostsController < ApplicationController
   # GET /microposts/1.json
   def show
     @micropost = Micropost.find(params[:id])
-    @user = User.find(params[:user_id])
+    #@user = User.find(params[:user_id])
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @micropost }
@@ -27,7 +29,7 @@ class MicropostsController < ApplicationController
   # GET /microposts/new.json
   def new
     @micropost = Micropost.new(:user_id => "user_id")
-    @user = User.find(params[:user_id])
+    #@user = User.find(params[:user_id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,14 +40,14 @@ class MicropostsController < ApplicationController
   # GET /microposts/1/edit
   def edit
     @micropost = Micropost.find(params[:id])
-    @user = User.find(params[:user_id])
+    #@user = User.find(params[:user_id])
   end
 
   # POST /microposts
   # POST /microposts.json
   def create
     @micropost = Micropost.new(params[:micropost])
-    @user = User.find(params[:user_id])
+    #@user = User.find(params[:user_id])
     Rails.logger.info "arstarstarst  #{params[:user_id]}"
 
     respond_to do |format|
@@ -63,7 +65,7 @@ class MicropostsController < ApplicationController
   # PUT /microposts/1.json
   def update
     @micropost = Micropost.find(params[:id])
-    @user = User.find(params[:user_id])
+    #@user = User.find(params[:user_id])
 
     respond_to do |format|
       if @micropost.update_attributes(params[:micropost])
@@ -87,4 +89,10 @@ class MicropostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def get_user
+     @user = User.find(params[:user_id])
+  end 
+  def get_micropost
+    @micropost = Micropost.find(params[:id])
+  end 
 end
